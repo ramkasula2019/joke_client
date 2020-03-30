@@ -1,1 +1,5 @@
 We cannot call the property like function call
+
+# to run the test case
+if __name__ == "__main__":
+    unittest.main()  

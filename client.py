@@ -42,8 +42,9 @@ class JokeClient:
 
     @property
     def base_url(self):
-        if _base_url is None:
-            _base_url = "https://sv443.net/jokeapi/v2/joke"
+        if self._base_url is None:
+            self._base_url = "https://sv443.net/jokeapi/v2/joke"
+        #print(self._base_url)
         return self._base_url   
 
     @property
@@ -55,5 +56,8 @@ class JokeClient:
     def category(self, value):
         self._category = value
 
-
+'''
+jc = JokeClient()
+jc.base_url
+'''
     
