@@ -12,7 +12,7 @@ class JokeClientTestCase(unittest.TestCase):
     def test_if_joke_client_is_instance_properly(self):
         self.assertIsInstance(self.joke_client, JokeClient)
 
-    def test_if_client_is_instantiated_properly(self):
+    def test_base_url_is_valid(self):
         self.assertEqual(self.joke_client.base_url, "https://sv443.net/jokeapi/v2/joke")
 
 
