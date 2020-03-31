@@ -56,6 +56,58 @@ class JokeClient:
     def category(self, value):
         self._category = value
 
+        valid_category = ["Programming", "Miscellaneous", "Dark"]
+        # test if value is string
+        if isinstance(value, str):
+            if value in valid_category:
+                self._category = value
+            elif value == "Any":
+                self._category = value
+            else:
+                raise ValueError ("Invalid Category")
+        # Check if value is list / set / tuple
+        elif isinstance(value, (tuple, set, list)):
+            if set(value).issubset(valid_category):
+                self._category = ",".join(value)
+            else:
+                # if passed tuple/list/set has no valid value in category
+                raise ValueError (
+                        "Argument should be of type {}".format(valid_category)
+                        )
+        elif value is None:
+            self._category = None
+        else:
+            raise TypeError (" Argument should be of type String or tuple or list or set")
+
+    @property
+    def flags(self):
+        return self._flags
+
+    @flags.setter
+    def flags(self, value):
+        valid_flags = [ 
+            "nsfw",
+            "religious",
+            "political",
+            "racist",
+            "sexist"
+            ]
+
+        if value is None:
+            self._flags = value
+        elif isinstance (value,str):
+            if value in valid_flags:
+                self._flags = value
+            else:
+                raise ValueError(f"flags must be one of : {valid_flags}")
+        elif isinstance (value, (tuple, set , list)):
+            if set(value).issubset(valid_flags):
+                self._flags = ",".join(value)
+            else:
+                raise ValueError (f"flags list must be among: {valid_flags}")
+        else:
+            raise TypeError ("Unxpected flag type. Must be String/Tuple/List/Set")
+
 '''
 jc = JokeClient()
 jc.base_url
