@@ -108,7 +108,51 @@ class JokeClient:
         else:
             raise TypeError ("Unxpected flag type. Must be String/Tuple/List/Set")
 
-'''
+    @property
+    def response_format(self):
+        return self._response_format
+    
+    @response_format.setter
+    def response_format(self, value):
+        valid_response_format = ["xml", "yaml", "json", "text"]
+        if isinstance(value, str):
+            if value in valid_response_format:
+                self._response_format = value
+            else:
+                raise ValueError("The response format should be one of {}".format(valid_response_format))
+        else:
+            raise TypeError("Response format must be of type string")
+
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        valid_joke_type = ["single",  "twopart"]
+
+        if isinstance(value, str):
+            if value not in valid_joke_type:
+                raise ValueError ("the value shoule be one of {}".format(valid_joke_type))
+            else:
+                self._type = value
+        else:
+            raise TypeError("Plz provide string type")
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        if isinstance(value, int):
+            if value in range (0,170):
+                self._id = value 
+            else:
+                raise ValueError ("The value should be in between 0 and 169")
+        else:
+            raise TypeError ("The id should be integer")
+'''     
 jc = JokeClient()
 jc.base_url
 '''

@@ -9,7 +9,7 @@ class JokeClientTestCase(unittest.TestCase):
     def setUp(self):
         self.joke_client = JokeClient()
 
-    def test_if_joke_client_is_instance_properly(self):
+    def test_joke_client_if_instance_is_set_properly(self):
         self.assertIsInstance(self.joke_client, JokeClient)
 
     def test_joke_client_if_base_url_is_valid(self):
@@ -71,12 +71,46 @@ class JokeClientTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.joke_client.flags = 10
 
+    def test_joke_client_if_response_format_is_valid(self):
+        valid_response_format = "xml"
+        
+        # assert when response format is valid
+        self.joke_client.response_format = valid_response_format
+        self.assertEqual(valid_response_format, self.joke_client.response_format)
 
+        # assert when invalid response format is pass
+        invalid_response_format = "invalid"
+        with self.assertRaises(ValueError):
+            self.joke_client.response_format = invalid_response_format
+      
+        # assert when invalid type  is pass
+        invalid_response_format = 20
+        with self.assertRaises(TypeError):
+            self.joke_client.response_format = invalid_response_format
 
+    def test_if_joke_client_type_is_valid(self):
+        
+        self.joke_client.type = "single"
+        self.assertEqual("single", self.joke_client.type)
 
+        self.joke_client.type = "twopart"
+        self.assertEqual("twopart", self.joke_client.type)
 
+        with self.assertRaises(ValueError):
+            self.joke_client.type = "threepart"
 
+        with self.assertRaises(TypeError):
+            self.joke_client.type = 10
 
+    def test_joke_client_if_id_is_valid(self):
+        self.joke_client.id = 8
+        self.assertEqual(8, self.joke_client.id)
+
+        with self.assertRaises(ValueError):
+            self.joke_client.id = 200
+
+        with self.assertRaises(TypeError):
+            self.joke_client.id = 'Invalid'
 
 if __name__ == "__main__":
     unittest.main()        
