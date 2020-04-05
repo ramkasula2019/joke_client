@@ -47,6 +47,11 @@ class JokeClient:
         #print(self._base_url)
         return self._base_url   
 
+    # @base_url.setter
+    # def base_url(self, value):
+    #     if value == None:
+    #         self._base_url = value
+
     @property
     def category(self):
         """_category (str or list/tuple/set) : Category of joke to fetch"""
@@ -152,8 +157,25 @@ class JokeClient:
                 raise ValueError ("The value should be in between 0 and 169")
         else:
             raise TypeError ("The id should be integer")
-'''     
-jc = JokeClient()
-jc.base_url
-'''
+
+    
+    def joke(self):
+        "fetches a joke from api and return them"
+        url =  "{0}/{1}".format(self._base_url,self.category)       
+        response = requests.get(url = url)
+        if response.status_code ==200:
+            if response.text:
+                return response.json()
+            return None
+
+# jc = JokeClient(category=['Programming','Dark'])
+# jc1 = JokeClient(category='Programming')
+# jc.base_url
+# json_response = jc.joke()
+# print(type(json_response))
+# if(isinstance(json_response,dict)):
+#     print("yes")
+# else:
+#     print("NO")
+
     

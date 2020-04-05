@@ -111,6 +111,12 @@ class JokeClientTestCase(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             self.joke_client.id = 'Invalid'
+    
+    def test_joke_client_fetches_a_joke(self):
+        self.joke_client.base_url
+        joke = self.joke_client.joke()
+        self.assertIsInstance(joke, dict)
+        self.assertFalse(joke['error'])
 
 if __name__ == "__main__":
     unittest.main()        
